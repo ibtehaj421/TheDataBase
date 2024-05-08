@@ -5,11 +5,9 @@
 CREATE TABLE OWNER(
 	oID VARCHAR(7) PRIMARY KEY NOT NULL,
 	NAME VARCHAR(50) NOT NULL,
-	--gID VARCHAR(7), --owner will not store the gym id he or she is responsible for but the gym will track on what basis the gym relates to the owner.
 	USERNAME VARCHAR(50),
 	EMAIL VARCHAR(50),
 	PASSWORD VARCHAR(50),
-	--FOREIGN KEY(gID) REFERENCES GYM(gID)
 	);
 --OWNER
 
