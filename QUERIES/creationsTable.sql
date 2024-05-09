@@ -107,12 +107,16 @@ CREATE TABLE [MEMBER]
 	member_id VARCHAR(7) PRIMARY KEY NOT NULL,
 	membership_id VARCHAR(7) NOT NULL,
 	workoutPlan_id VARCHAR(7) NOT NULL,
+	dietPlan_id VARCHAR(7) NOT NULL,
 	[name] VARCHAR(30) NOT NULL,
 	[weight] INT,
 
 	FOREIGN KEY(membership_id) REFERENCES MEMBERSHIP(membership_id),
-	FOREIGN KEY(workoutPlan_id) REFERENCES WORKOUT_PLAN(workoutPlan_id)
+	FOREIGN KEY(workoutPlan_id) REFERENCES WORKOUT_PLAN(workoutPlan_id),
+	FOREIGN KEY(dietPlan_id) REFERENCES DIET_PLAN(dietPlan_id)
 );
+
+DROP TABLE MEMBER
 
 -- Membership
 CREATE TABLE Membership 
@@ -137,10 +141,11 @@ CREATE TABLE WORKOUT_PLAN
 -- DAY
 CREATE TABLE [DAY]
 (
-	day_id VARCHAR(7) PRIMARY KEY NOT NULL,
+	day_id VARCHAR(7) NOT NULL,
 	workoutPlan_id VARCHAR(7) NOT NULL,
 	[dayOfWeek] VARCHAR(10) NOT NULL,
 	
+    PRIMARY KEY (day_id, workoutPlan_id),
 	FOREIGN KEY (workoutPlan_id) REFERENCES WORKOUT_PLAN(workoutPlan_id)
 );
 
@@ -149,11 +154,12 @@ CREATE TABLE EXERCISE_DAY
 (
 	exercise_id VARCHAR(7) NOT NULL,
 	day_id VARCHAR(7) NOT NULL,
+	workoutPlan_id VARCHAR(7) NOT NULL,
 	
     PRIMARY KEY (day_id, exercise_id),
 
 	FOREIGN KEY(exercise_id) REFERENCES EXERCISE(exercise_id),
-	FOREIGN KEY(day_id) REFERENCES DAY(day_id)
+	FOREIGN KEY(day_id, workoutPlan_id) REFERENCES [DAY](day_id, workoutPlan_id)
 );
 
 -- EXERCISE
@@ -161,13 +167,14 @@ CREATE TABLE EXERCISE
 (
 	exercise_id VARCHAR(7) PRIMARY KEY NOT NULL,
 	day_id VARCHAR(7) NOT NULL,
+	workoutPlan_id VARCHAR(7) NOT NULL,
 	[name] VARCHAR(30) NOT NULL,
 	eqiupment_name VARCHAR(30) NOT NULL,
 	[sets] INT NOT NULL,
 	reps INT NOT NULL,
 	restIntervals INT NOT NULL,
 	
-	FOREIGN KEY(day_id) REFERENCES [DAY](day_id)
+	FOREIGN KEY(day_id, workoutPlan_id) REFERENCES [DAY](day_id, workoutPlan_id)
 );
 
 -- Muscle
