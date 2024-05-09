@@ -207,7 +207,7 @@ CREATE TABLE MEAL
 	--removed the diet plan key in the meal table
 	--now the meal takes in a nutrition id where it specifies which nutrition it needs to have or contains.
 	nutrition_id VARCHAR(7) NOT NULL,
-	calories INT NOT NULL, --for now keeping calories as int value not decica.
+	
     PRIMARY KEY (meal_id),
 	FOREIGN KEY(nutrition_id) REFERENCES NUTRITION(nutrition_id)
 );
@@ -221,7 +221,7 @@ CREATE TABLE NUTRITION
     [name] VARCHAR(30) UNIQUE NOT NULL, --added a unique constraint to the name of the nutrition as it is a candidate key and user can search for a meal containing this nutrition.
     [unit] VARCHAR(30) NOT NULL,
     [quantity] VARCHAR(30) NOT NULL,
-
+calories INT NOT NULL, --for now keeping calories as int value not decica.
     PRIMARY KEY (nutrition_id),
     FOREIGN KEY(allergen_id) REFERENCES ALLERGEN(allergen_id)
 );
