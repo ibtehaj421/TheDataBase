@@ -40,7 +40,7 @@ JOIN (
 	ON EXERCISE_DAY.day_id = RES3.day_id
 ) AS RES4
 ON EXERCISE.exercise_id = RES4.exercise_id
-WHERE eqiupment_name LIKE '%Machine%'
+WHERE equipment_name LIKE '%Machine%'
 
 -- Query 10
 SELECT RES1.name AS [Gym Name], COUNT(membership_id) AS [Number of Members]
@@ -66,7 +66,7 @@ SELECT * FROM DIET_PLAN DP JOIN (SELECT mID FROM LowCal WHERE cals < 500) AS RES
 ;
 
 
---report 1 quer
+--report 1 querY
 --we will run a few different queries.
 --first list all the gym trainers of a specific gym
 --now for the admin this feature feeds a gym id 
@@ -89,3 +89,50 @@ SELECT dietPlan_id FROM TRAINER_DIETPLAN WHERE trainer_id = 1 --somespecific val
 WITH RES AS(
 SELECT member_id FROM MEMBER_DIET WHERE diet_id = 1) -- some specified value.
 SELECT M.member_id,M.name FROM MEMBER M JOIN RES R ON M.member_id = R.member_id;
+
+
+--------------------------
+--- Additional Queries ---
+--------------------------
+
+-- 1. Admin : Compare Ratings of all Gyms.
+SELECT name AS [Gym Name], rating
+FROM GYM
+ORDER BY rating DESC
+
+-- 2. Gym : Find all members whose membership has expired.
+SELECT MEMBER.name, MEMBER.weight, MEMBER.member_id, MEMBER.membership_id, expiry
+FROM Membership
+JOIN MEMBER
+ON Membership.membership_id = MEMBER.membership_id
+WHERE gym_id = 1 AND expiry < GETDATE()
+
+-- 3. Gym : Compare the usage of eqiupment
+SELECT equipment_name, COUNT(equipment_name) AS [People Using]
+FROM MEMBERSHIP
+JOIN (
+	SELECT equipment_name, MEMBER.membership_id
+	FROM EXERCISE
+	JOIN MEMBER
+	ON EXERCISE.workoutPlan_id = MEMBER.workoutPlan_id
+) AS RES1
+ON MEMBERSHIP.membership_id = RES1.membership_id
+WHERE gym_id = 1
+GROUP BY equipment_name
+
+-- 4. Admin/Trainer/Member : Find all gyms that have specific equipment
+SELECT DISTINCT NAME 
+FROM GYM
+JOIN (
+	SELECT gym_id
+	FROM MEMBERSHIP
+	JOIN (
+		SELECT equipment_name, MEMBER.membership_id
+		FROM EXERCISE
+		JOIN MEMBER
+		ON EXERCISE.workoutPlan_id = MEMBER.workoutPlan_id
+		WHERE equipment_name = 'Dumbbells'
+	) AS RES1
+	ON MEMBERSHIP.membership_id = RES1.membership_id
+) AS RES2
+ON GYM.gym_id = RES2.gym_id
