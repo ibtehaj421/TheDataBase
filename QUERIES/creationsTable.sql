@@ -116,8 +116,6 @@ CREATE TABLE [MEMBER]
 	FOREIGN KEY(dietPlan_id) REFERENCES DIET_PLAN(dietPlan_id)
 );
 
-DROP TABLE MEMBER
-
 -- Membership
 CREATE TABLE Membership 
 (
@@ -169,7 +167,7 @@ CREATE TABLE EXERCISE
 	day_id VARCHAR(7) NOT NULL,
 	workoutPlan_id VARCHAR(7) NOT NULL,
 	[name] VARCHAR(30) NOT NULL,
-	eqiupment_name VARCHAR(30) NOT NULL,
+	equipment_name VARCHAR(30) NOT NULL,
 	[sets] INT NOT NULL,
 	reps INT NOT NULL,
 	restIntervals INT NOT NULL,
