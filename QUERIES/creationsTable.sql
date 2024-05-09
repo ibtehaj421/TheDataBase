@@ -225,6 +225,16 @@ calories INT NOT NULL, --for now keeping calories as int value not decica.
     PRIMARY KEY (nutrition_id),
     FOREIGN KEY(allergen_id) REFERENCES ALLERGEN(allergen_id)
 );
+--meal nutrition
+CREATE TABLE meal_nutrient(
+	--consists of meal and nutrient id as a meal can have many nutrient and many nutrients can be found in many meals.
+	nutrient_id VARCHAR(7) NOT NULL,
+	meal_id VARCHAR(7) NOT NULL,
+	calorie INT NOT NULL, --must always be specified as it is the main
+	PRIMARY KEY(nutrient_id,meal_id),
+	FOREIGN KEY(nutrient_id) REFERENCES NUTRITION(nutrition_id),
+	FOREIGN KEY(meal_id) REFERENCES MEAL(meal_id)
+	);
 
 -- Allergen
 CREATE TABLE ALLERGEN
