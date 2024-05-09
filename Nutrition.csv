@@ -1,0 +1,51 @@
+NUTRITION_ID,ALLERGEN_ID,NAME,UNIT,QUANTITY,CALORIES
+N1,AL1,Protein,grams,100,400
+N2,AL2,Fat,grams,50,450
+N3,AL3,Carbs,grams,200,800
+N4,AL4,Fiber,grams,30,120
+N5,AL5,Vitamin C,mg,1000,50
+N6,AL6,Iron,mg,15,10
+N7,AL7,Calcium,mg,30,20
+N8,AL8,Magnesium,mg,20,15
+N9,AL9,Zinc,mg,25,12
+N10,AL10,Omega-3,mg,300,50
+N11,AL1,Vitamin D,IU,1000,40
+N12,AL2,Vitamin E,IU,400,60
+N13,AL3,Vitamin K,mcg,120,10
+N14,AL4,Folate,mcg,400,10
+N15,AL5,Vitamin B12,mcg,2,15
+N16,AL6,Vitamin A,IU,500,20
+N17,AL7,Potassium,mg,4700,40
+N18,AL8,Sodium,mg,1500,10
+N19,AL9,Choline,mg,550,15
+N20,AL10,Iodine,mcg,150,5
+N21,AL1,Selenium,mcg,70,4
+N22,AL2,Copper,mg,900,2
+N23,AL3,Manganese,mg,2.3,3
+N24,AL4,Phosphorus,mg,700,4
+N25,AL5,Fluoride,mg,4,1
+N26,AL6,Biotin,mcg,30,4
+N27,AL7,Vitamin B6,mg,1.3,3
+N28,AL8,Vitamin B1,mg,1.2,3
+N29,AL9,Vitamin B2,mg,1.3,3
+N30,AL10,Vitamin B3,mg,16,5
+N31,AL1,Vitamin B5,mg,5,5
+N32,AL2,Vitamin B7,mcg,30,4
+N33,AL3,Vitamin H,mcg,30,4
+N34,AL4,Vitamin P,mg,5,3
+N35,AL5,Lecithin,mg,1200,100
+N36,AL6,Creatine,mg,5,5
+N37,AL7,Taurine,mg,1000,15
+N38,AL8,Carnitine,mg,500,5
+N39,AL9,Choline,mg,425,30
+N40,AL10,Beta-Alanine,mg,3,3
+N41,AL1,Alpha-Lipoic Acid,mg,600,4
+N42,AL2,Astaxanthin,mg,4,2
+N43,AL3,Quercetin,mg,500,15
+N44,AL4,Bromelain,mg,1000,25
+N45,AL5,Resveratrol,mg,600,30
+N46,AL6,Green Tea Extract,mg,400,5
+N47,AL7,Coenzyme Q10,mg,100,5
+N48,AL8,Lutein,mg,10,4
+N49,AL9,Zeaxanthin,mg,2,2
+N50,AL10,Ginseng,mg,200,15

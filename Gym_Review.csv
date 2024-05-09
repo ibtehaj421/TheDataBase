@@ -1,0 +1,51 @@
+review_id,gym_id,feedback,rating
+R51,G1,"Clean facilities, friendly staff.",4.5
+R52,G2,Great selection of equipment.,4.7
+R53,G1,Excellent trainers and classes.,5
+R54,G3,"Good hours, but can be crowded.",3.8
+R55,G2,Modern equipment and clean.,4.8
+R56,G4,Friendly and professional staff.,4.6
+R57,G3,"Convenient location, good hours.",4
+R58,G4,"Good environment, helpful staff.",4.4
+R59,G5,Great value for the cost.,4.7
+R60,G5,Needs to improve cleanliness.,3.7
+R61,G1,Good group classes and trainers.,4.9
+R62,G2,"Good amenities, reasonable prices.",4.5
+R63,G6,"Friendly staff, great trainers.",4.8
+R64,G6,Excellent personal trainers.,5
+R65,G7,Could improve time management.,3.5
+R66,G7,Convenient hours and friendly staff.,4.2
+R67,G8,Clean facilities and good equipment.,4.7
+R68,G8,"Good gym, but can be crowded.",3.9
+R69,G9,Great classes and knowledgeable trainers.,4.8
+R70,G10,Well-maintained facilities.,4.5
+R71,G9,Good location and helpful staff.,4.6
+R72,G10,"Good gym, reasonable prices.",4.2
+R73,G11,Good group classes.,4.9
+R74,G12,Clean and modern facilities.,4.7
+R75,G11,Great classes and friendly staff.,4.8
+R76,G13,Excellent personal trainers.,5
+R77,G14,Could improve staff friendliness.,3.8
+R78,G15,Good environment and helpful staff.,4.3
+R79,G15,Well-maintained equipment.,4.6
+R80,G16,Good equipment but needs more space.,3.7
+R81,G16,Convenient location and hours.,4.2
+R82,G17,"Clean gym, but could improve the staff.",3.9
+R83,G17,Friendly and knowledgeable trainers.,4.6
+R84,G18,Great gym but expensive membership.,4
+R85,G18,Good facilities but can be crowded.,3.8
+R86,G19,Great equipment and friendly staff.,4.7
+R87,G19,Good gym but needs more trainers.,4.2
+R88,G20,Excellent amenities and staff.,4.9
+R89,G20,Needs more trainers and classes.,3.9
+R90,G21,Good equipment and helpful staff.,4.6
+R91,G21,Well-kept gym but could improve classes.,3.7
+R92,G22,Convenient hours and good trainers.,4.5
+R93,G23,"Well-maintained gym, helpful staff.",4.7
+R94,G24,"Good equipment, friendly staff.",4.6
+R95,G24,Good gym but could improve classes.,3.8
+R96,G25,Good environment and modern facilities.,4.9
+R97,G25,Friendly and helpful trainers.,4.8
+R98,G26,Good gym but can be expensive.,3.9
+R99,G26,"Clean gym, helpful staff.",4.4
+R100,G27,Well-maintained gym and friendly staff.,4.8

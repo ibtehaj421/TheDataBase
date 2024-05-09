@@ -1,0 +1,51 @@
+speciality_id,trainer_id,[name]
+S1,T3,Strength Training
+S2,T8,Yoga
+S3,T14,Pilates
+S4,T27,Cardio
+S5,T21,Weightlifting
+S6,T10,Dance Fitness
+S7,T32,CrossFit
+S8,T4,Stretching
+S9,T9,Kettlebell
+S10,T20,High-Intensity Interval Training (HIIT)
+S11,T2,Boxing
+S12,T13,Circuit Training
+S13,T31,Martial Arts
+S14,T26,Mobility
+S15,T11,Dance
+S16,T17,Functional Training
+S17,T22,Powerlifting
+S18,T6,Bodybuilding
+S19,T23,Endurance
+S20,T5,Plyometrics
+S21,T24,Speed Training
+S22,T35,Aerobics
+S23,T19,Meditation
+S24,T15,Sports Conditioning
+S25,T28,Nutrition
+S26,T1,Bootcamp
+S27,T30,Flexibility
+S28,T33,Senior Fitness
+S29,T29,Zumba
+S30,T25,Youth Fitness
+S31,T34,Core Strength
+S32,T12,Barre
+S33,T36,Swimming
+S34,T37,Strength & Conditioning
+S35,T16,Dance
+S36,T18,Gymnastics
+S37,T39,Resistance Training
+S38,T7,Interval Training
+S39,T38,High-Intensity Functional Training
+S40,T40,Calisthenics
+S41,T41,Martial Arts
+S42,T42,Strength & Endurance
+S43,T43,Agility Training
+S44,T44,Kickboxing
+S45,T45,Suspension Training
+S46,T46,Bodyweight Training
+S47,T47,Weight Management
+S48,T48,Rehabilitation
+S49,T49,Lifestyle Coaching
+S50,T50,Post-Rehabilitation

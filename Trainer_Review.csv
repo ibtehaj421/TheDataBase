@@ -1,0 +1,51 @@
+review_id,trainer_id,feedback,rating
+R1,T1,"Excellent trainer, very motivating.",5
+R2,T2,Knowledgeable and supportive.,4.5
+R3,T1,Helped me achieve my goals!,4.9
+R4,T3,Great workout plans and guidance.,4
+R5,T2,Enthusiastic and energetic.,4.8
+R6,T3,Very creative in workout routines.,4.6
+R7,T4,Good but sometimes unresponsive.,3.5
+R8,T5,Outstanding guidance and support.,5
+R9,T4,Friendly and encouraging.,4.7
+R10,T6,Knowledgeable but sometimes late.,3.5
+R11,T5,Very attentive and helpful.,4.9
+R12,T7,Good but needs to be more punctual.,3.7
+R13,T7,Very enthusiastic and passionate.,5
+R14,T6,Motivated me to stay consistent.,4.8
+R15,T8,Outstanding trainer and mentor.,4.9
+R16,T9,Good trainer but could be late.,3.7
+R17,T8,Great with personalized workouts.,4.5
+R18,T10,Amazing energy and motivation.,4.8
+R19,T9,Very creative and motivating.,4.7
+R20,T11,Always focused on form and safety.,4.8
+R21,T12,Extremely motivating and energetic.,5
+R22,T13,Very dedicated and helpful.,4.9
+R23,T10,Needs to improve time management.,3.3
+R24,T14,"Friendly, but sessions can be rushed.",3.8
+R25,T15,Passionate and inspiring.,4.9
+R26,T16,Nice and always available to help.,4.7
+R27,T17,Motivates me to push my limits.,4.7
+R28,T18,Good but could improve time management.,3.4
+R29,T19,Very knowledgeable and helpful.,4.8
+R30,T20,Outstanding guidance and support.,4.9
+R31,T16,Always encouraging and supportive.,4.9
+R32,T17,Could improve communication skills.,3
+R33,T18,Needs to be more focused on clients.,3.3
+R34,T19,Needs to improve time management.,3.5
+R35,T20,Very attentive and caring.,4.6
+R36,T21,Good trainer but can be late.,3.7
+R37,T21,Great energy and motivation.,4.9
+R38,T22,Needs to be more punctual.,3.8
+R39,T22,Creative and knowledgeable.,4.5
+R40,T23,Very motivating and attentive.,4.8
+R41,T23,Very professional and skilled.,4.9
+R42,T24,Very dedicated and supportive.,4.9
+R43,T24,Excellent workouts and guidance.,4.7
+R44,T25,Very creative and knowledgeable.,4.8
+R45,T25,Motivated me to stay consistent.,4.8
+R46,T26,Friendly and supportive.,4.7
+R47,T26,"Excellent trainer, very motivating.",4.9
+R48,T27,Always encouraging and supportive.,5
+R49,T27,Helped me achieve my goals!,5
+R50,T28,Very knowledgeable and supportive.,4.8

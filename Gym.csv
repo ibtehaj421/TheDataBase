@@ -1,0 +1,51 @@
+gym_id,owner_id,name,membership_growth_rate,financial_performance,no_of_members,rating,location,password,email
+G1,O1,Power Gym,0.12,Steady Revenue,320,4,Karachi,P0w3rGym,powergym@gmail.com
+G2,O2,Fitness Zone,0.15,Excellent Revenue,380,4,Lahore,F1tn3ssZ,fitnesszone@gmail.com
+G3,O3,Muscle Planet,0.18,Strong Growth,450,5,Islamabad,M@sclePl,muscleplanet@gmail.com
+G4,O4,Iron Strength Gym,0.1,Good Profit Margin,280,4,Rawalpindi,Ir0nStrngth,ironstrength@gmail.com
+G5,O5,Gym Nation,0.2,Excellent Performance,500,5,Faisalabad,GymN@tion,gymnation@gmail.com
+G6,O6,Elite Gym,0.22,Strong Financials,420,4,Multan,El1teGym,elitegym@gmail.com
+G7,O7,Pro Fitness Center,0.17,Good Revenue,350,4,Peshawar,Pr0F1tn3ssC,profitnesscenter@gmail.com
+G8,O8,Max Fitness,0.19,Increasing Growth,450,4,Quetta,MaxF1tn3ss,maxfitness@gmail.com
+G9,O9,Strong Gym,0.13,Stable Financials,380,4,Hyderabad,Str0ngGym,stronggym@gmail.com
+G10,O10,The Gym Factory,0.14,Consistent Revenue,300,3,Gujranwala,GymF@ctory,thegymfactory@gmail.com
+G11,O11,Powerhouse Gym,0.18,Outstanding Growth,420,5,Abbottabad,P0w3rh0use,powerhouse@gmail.com
+G12,O12,Gym Hub,0.15,Strong Financials,350,4,Sukkur,GymH@b,gymhub@gmail.com
+G13,O13,Fitness Palace,0.2,Excellent Growth,480,5,Bahawalpur,F1tn3ssP@l,fitnesspalace@gmail.com
+G14,O14,Muscle Power Gym,0.12,Steady Profit Margin,320,4,Sialkot,M@scleP0wer,musclepower@gmail.com
+G15,O15,Gym Stars,0.13,Good Performance,400,4,Gujrat,GymSt@rs,gymstars@gmail.com
+G16,O16,Peak Fitness,0.17,Strong Growth,450,4,Mardan,P3@kF1tn3ss,peakfitness@gmail.com
+G17,O17,Dynamic Gym,0.15,Steady Financials,350,4,Quetta,Dyn@m1cGym,dynamicgym@gmail.com
+G18,O18,Energy Fitness,0.2,Excellent Growth,480,5,Jhelum,3n3rgyF1t,energyfitness@gmail.com
+G19,O19,Strong & Fit Gym,0.18,Strong Growth,400,4,Sargodha,Str0ngF1t,strongandfit@gmail.com
+G20,O20,Ultimate Fitness,0.12,Consistent Revenue,350,3,Karachi,Ult1mateF1t,ultimatefitness@gmail.com
+G21,O21,The Gym Experts,0.1,Good Profit Margin,320,3,Lahore,GymExprt,gymexperts@gmail.com
+G22,O22,Gym One,0.14,Stable Financials,300,3,Abbottabad,Gym0ne,gymone@gmail.com
+G23,O23,Fitness House,0.16,Increasing Revenue,420,4,Multan,F1tn3ssH,fitnesshouse@gmail.com
+G24,O24,Gym Revolution,0.17,Strong Financial Health,450,4,Rawalpindi,GymRevol,gymrevolution@gmail.com
+G25,O25,Gym Glory,0.19,Consistent Profit,380,4,Faisalabad,GymGlory,gymglory@gmail.com
+G26,O26,Peak Performance,0.2,Outstanding Growth,500,5,Sukkur,P3@kP3rf,peakperformance@gmail.com
+G27,O27,Gym Legends,0.15,Strong Financials,400,4,Sialkot,GymLgnd,gymlegends@gmail.com
+G28,O28,Fitness Factory,0.1,Steady Revenue,300,3,Bahawalpur,F@ct0ryF,fitnessfactory@gmail.com
+G29,O29,Fitness Empire,0.17,Strong Growth,400,4,Mardan,F1tn3ssE,fitnessempire@gmail.com
+G30,O30,Peak Zone,0.14,Good Profit Margin,350,3,Karachi,P3@kZ0ne,peakzone@gmail.com
+G31,O31,The Gym Kingdom,0.19,Excellent Revenue,450,5,Lahore,GymKingdm,thegymkingdom@gmail.com
+G32,O32,Fitness Kingdom,0.13,Good Profit Margin,380,4,Multan,F1tn3ssKing,fitnesskingdom@gmail.com
+G33,O33,Elite Strength Gym,0.15,Strong Growth,420,4,Peshawar,El1teStrngth,elitestrength@gmail.com
+G34,O34,Fitness Center,0.2,Excellent Financials,480,5,Quetta,F1tn3ssCtr,fitnesscenter@gmail.com
+G35,O35,Pro Fitness Club,0.16,Strong Financials,420,4,Gujrat,Pr0F1tn3ssC,profitnessclub@gmail.com
+G36,O36,Gym Power,0.18,Strong Financial Health,450,5,Abbottabad,GymP@w3r,gympower@gmail.com
+G37,O37,Muscle Empire,0.15,Consistent Revenue,350,4,Sukkur,Muscl3Emp,muscleempire@gmail.com
+G38,O38,The Gym Network,0.12,Good Profit Margin,300,3,Karachi,GymNetw,thegymnetwork@gmail.com
+G39,O39,Muscle House Gym,0.14,Steady Growth,320,4,Lahore,Muscl3H,musclehouse@gmail.com
+G40,O40,Gym Glory,0.16,Strong Financials,400,4,Faisalabad,GymGl0ry,gymglory@gmail.com
+G41,O41,Gym Stars,0.19,Excellent Performance,450,5,Multan,GymSt@rs,gymstars@gmail.com
+G42,O42,Ultimate Gym,0.2,Outstanding Growth,500,5,Peshawar,Ult1mateG,ultimategym@gmail.com
+G43,O43,Muscle Kingdom,0.15,Strong Growth,420,4,Quetta,Muscl3K,musclekingdom@gmail.com
+G44,O44,Fitness Force,0.12,Steady Revenue,320,4,Hyderabad,F1tn3ssFrce,fitnessforce@gmail.com
+G45,O45,Elite Fitness Club,0.13,Good Profit Margin,380,4,Gujranwala,El1teF1tnessC,elitefitnessclub@gmail.com
+G46,O46,Gym Zone,0.14,Good Performance,300,3,Abbottabad,GymZ0ne,gymzone@gmail.com
+G47,O47,Power Gym,0.15,Strong Financials,400,4,Faisalabad,P0w3rGym,powergym@gmail.com
+G48,O48,Fitness Experts,0.16,Good Profit Margin,350,3,Multan,F1tn3ssExp,fitnessexperts@gmail.com
+G49,O49,Gym Empire,0.13,Strong Growth,380,4,Hyderabad,GymEmp,gymempire@gmail.com
+G50,O50,Fitness Network,0.1,Good Revenue,320,3,Sialkot,F1tn3ssNet,fitnessnetwork@gmail.com
