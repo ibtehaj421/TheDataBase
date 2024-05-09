@@ -52,3 +52,40 @@ FROM (
 ) AS RES1
 WHERE expiry >= DATEADD(MONTH, -6, GETDATE())
 GROUP BY RES1.name
+
+
+
+--Query number 3 for the diet plans with less than 500 calories.
+--we will be using only one nutrition per diet plan
+
+
+WITH LowCal AS(
+	SELECT meal_id AS mID,SUM(calorie) AS cals FROM meal_nutrient GROUP BY meal_id
+	)
+SELECT * FROM DIET_PLAN DP JOIN (SELECT mID FROM LowCal WHERE cals < 500) AS RES ON DP.meal_id = RES.mID
+;
+
+
+--report 1 quer
+--we will run a few different queries.
+--first list all the gym trainers of a specific gym
+--now for the admin this feature feeds a gym id 
+--but for the gym owner the query is a but modified as the gym owner does not have access to other gym ids. we will search on basis of the owner id and then extract a gym id.
+
+SELECT Trainer_id FROM TRAINER_GYM WHERE gym_id = 1; --some specified value.
+--now the second select will be shown on the screen as which trainer would you like to view.
+--the main query begins here.
+WITH MemberList AS(
+	SELECT member_id FROM TRAINING_SESSION WHERE trainer_id = 1) --some specified value.
+SELECT M.member_id,M.name FROM MEMBER M JOIN MemberList ML ON M.member_id = ML.member_id;
+
+
+--report 3
+--all members using a trainers diet plan
+
+SELECT dietPlan_id FROM TRAINER_DIETPLAN WHERE trainer_id = 1 --somespecific value.
+--this shows all the diet plans 
+--then the user will select a diet plan id and it will show which members are using this diet plan
+WITH RES AS(
+SELECT member_id FROM MEMBER_DIET WHERE diet_id = 1) -- some specified value.
+SELECT M.member_id,M.name FROM MEMBER M JOIN RES R ON M.member_id = R.member_id;
