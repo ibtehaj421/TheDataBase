@@ -1,0 +1,51 @@
+exercise_id,day_id,workoutPlan_id,[name],equipment_name,[sets],reps,restIntervals
+E1,Y1,W1,Squat,Barbell,4,12,60
+E2,Y2,W2,Bench Press,Barbell,3,10,90
+E3,Y3,W3,Deadlift,Barbell,3,8,120
+E4,Y4,W4,Pull-Ups,Bodyweight,3,10,90
+E5,Y5,W5,Overhead Press,Barbell,4,8,60
+E6,Y6,W6,Lunges,Dumbbell,3,12,60
+E7,Y7,W7,Push-Ups,Bodyweight,3,15,45
+E8,Y8,W8,Bicep Curls,Dumbbell,3,12,60
+E9,Y9,W9,Tricep Dips,Bodyweight,3,12,60
+E10,Y10,W10,Leg Press,Machine,4,12,90
+E11,Y11,W11,Pull-Ups,Bodyweight,3,10,90
+E12,Y12,W12,Dumbbell Row,Dumbbell,4,12,75
+E13,Y13,W13,Lateral Raises,Dumbbell,3,10,60
+E14,Y14,W14,Plank,Bodyweight,3,1,45
+E15,Y15,W15,Squats,Barbell,4,12,60
+E16,Y16,W16,Leg Curls,Machine,3,12,60
+E17,Y17,W17,Calf Raises,Barbell,4,15,60
+E18,Y18,W18,Chin-Ups,Bodyweight,3,10,75
+E19,Y19,W19,Deadlift,Barbell,3,8,120
+E20,Y20,W20,Lunges,Dumbbell,3,12,60
+E21,Y21,W1,Overhead Press,Barbell,3,8,60
+E22,Y22,W2,Bicep Curls,Dumbbell,3,12,60
+E23,Y23,W3,Squats,Barbell,4,12,60
+E24,Y24,W4,Push-Ups,Bodyweight,3,15,45
+E25,Y25,W5,Plank,Bodyweight,3,1,45
+E26,Y26,W6,Leg Press,Machine,4,12,90
+E27,Y27,W7,Pull-Ups,Bodyweight,3,10,90
+E28,Y28,W8,Lunges,Dumbbell,3,12,60
+E29,Y29,W9,Deadlift,Barbell,3,8,120
+E30,Y30,W10,Bench Press,Barbell,3,10,90
+E31,Y31,W11,Dumbbell Row,Dumbbell,4,12,75
+E32,Y32,W12,Calf Raises,Barbell,4,15,60
+E33,Y33,W13,Leg Curls,Machine,3,12,60
+E34,Y34,W14,Lateral Raises,Dumbbell,3,10,60
+E35,Y35,W15,Squat,Barbell,4,12,60
+E36,Y36,W16,Chin-Ups,Bodyweight,3,10,75
+E37,Y37,W17,Deadlift,Barbell,3,8,120
+E38,Y38,W18,Leg Press,Machine,4,12,90
+E39,Y39,W19,Bicep Curls,Dumbbell,3,12,60
+E40,Y40,W20,Plank,Bodyweight,3,10,45
+E41,Y41,W1,Overhead Press,Barbell,3,8,60
+E42,Y42,W2,Push-Ups,Bodyweight,3,15,45
+E43,Y43,W3,Squat,Barbell,4,12,60
+E44,Y44,W4,Bench Press,Barbell,3,10,90
+E45,Y45,W5,Leg Press,Machine,4,12,90
+E46,Y46,W6,Pull-Ups,Bodyweight,3,10,90
+E47,Y47,W7,Deadlift,Barbell,3,8,120
+E48,Y48,W8,Bicep Curls,Dumbbell,3,12,60
+E49,Y49,W9,Chin-Ups,Bodyweight,3,10,75
+E50,Y50,W10,Leg Press,Machine,4,12,90
