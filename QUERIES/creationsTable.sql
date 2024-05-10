@@ -207,7 +207,8 @@ CREATE TABLE MUSCLE
 CREATE TABLE DIET_PLAN
 (
 	dietPlan_id VARCHAR(7) PRIMARY KEY NOT NULL,
-	[type] VARCHAR(30) NOT NULL,
+	meal_id VARCHAR(7) UNIQUE NOT NULL, --each diet plan consists of a meal so we link directly to a meal from the diet plan
+	[type] VARCHAR(30) NOT NULL, --breakfast lunch dinner etc.
 	objective VARCHAR(30) NOT NULL,
 	guidelines VARCHAR(200) NOT NULL,
 	difficulty_level VARCHAR(7) NOT NULL
@@ -217,37 +218,47 @@ CREATE TABLE DIET_PLAN
 CREATE TABLE MEAL
 (
 	meal_id VARCHAR(7) NOT NULL,
-	dietPlan_id VARCHAR(7) NOT NULL,
+	--removed the diet plan key in the meal table
+	--now the meal takes in a nutrition id where it specifies which nutrition it needs to have or contains.
+	nutrition_id VARCHAR(7) NOT NULL,
 	
-    PRIMARY KEY (meal_id, dietPlan_id),
-	FOREIGN KEY(dietPlan_id) REFERENCES DIET_PLAN(dietPlan_id)
+    PRIMARY KEY (meal_id),
+	FOREIGN KEY(nutrition_id) REFERENCES NUTRITION(nutrition_id)
 );
 
 -- Nutrition
 CREATE TABLE NUTRITION
 (
     nutrition_id VARCHAR(7) NOT NULL,
-    meal_id VARCHAR(7) NOT NULL,
-	dietPlan_id VARCHAR(7) NOT NULL,
-    [name] VARCHAR(30) NOT NULL,
+    --does not take a meal id instead it now has a linked allergen id.
+	allergen_id VARCHAR(7) NOT NULL,
+    [name] VARCHAR(30) UNIQUE NOT NULL, --added a unique constraint to the name of the nutrition as it is a candidate key and user can search for a meal containing this nutrition.
     [unit] VARCHAR(30) NOT NULL,
     [quantity] VARCHAR(30) NOT NULL,
-
-    PRIMARY KEY (nutrition_id, meal_id),
-    FOREIGN KEY(meal_id, dietPlan_id) REFERENCES MEAL(meal_id, dietPlan_id)
+calories INT NOT NULL, --for now keeping calories as int value not decica.
+    PRIMARY KEY (nutrition_id),
+    FOREIGN KEY(allergen_id) REFERENCES ALLERGEN(allergen_id)
 );
 
 -- Allergen
 CREATE TABLE ALLERGEN
 (
 	allergen_id VARCHAR(7) NOT NULL,
-	meal_id VARCHAR(7) NOT NULL,
-	dietPlan_id VARCHAR(7) NOT NULL,
-	[name] VARCHAR(30) NOT NULL,
-	
-	PRIMARY KEY (allergen_id, meal_id),
-    FOREIGN KEY(meal_id, dietPlan_id) REFERENCES MEAL(meal_id, dietPlan_id)
+	[name] VARCHAR(30) UNIQUE NOT NULL,
+	PRIMARY KEY (allergen_id)
+    --FOREIGN KEY(meal_id, dietPlan_id) REFERENCES MEAL(meal_id, dietPlan_id) removing for now.
 );
+
+--meal_nutrient
+CREATE TABLE meal_nutrient(
+	--consists of meal and nutrient id as a meal can have many nutrient and many nutrients can be found in many meals.
+	nutrient_id VARCHAR(7) NOT NULL,
+	meal_id VARCHAR(7) NOT NULL,
+	calorie INT NOT NULL, --must always be specified as it is the main
+	PRIMARY KEY(nutrient_id,meal_id),
+	FOREIGN KEY(nutrient_id) REFERENCES NUTRITION(nutrition_id),
+	FOREIGN KEY(meal_id) REFERENCES MEAL(meal_id)
+	);
 
 -- Trainer Review
 CREATE TABLE TRAINER_REVIEW
