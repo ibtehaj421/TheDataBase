@@ -110,7 +110,9 @@ CREATE TABLE [MEMBER]
 	dietPlan_id VARCHAR(7) NOT NULL,
 	[name] VARCHAR(30) NOT NULL,
 	[weight] INT,
-
+	email VARCHAR(100) NOT NULL,
+	[password] VARCHAR(100) NOT NULL,
+	verified INT, --for the admin to verify a user and a user can only log in once they are verified.
 	FOREIGN KEY(membership_id) REFERENCES MEMBERSHIP(membership_id),
 	FOREIGN KEY(workoutPlan_id) REFERENCES WORKOUT_PLAN(workoutPlan_id),
 	FOREIGN KEY(dietPlan_id) REFERENCES DIET_PLAN(dietPlan_id)
