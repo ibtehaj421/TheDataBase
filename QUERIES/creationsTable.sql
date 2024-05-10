@@ -20,9 +20,6 @@ CREATE TABLE GYM
 	financial_performance VARCHAR(100),
 	no_of_members INT,
     rating FLOAT,
-	[location] VARCHAR(50),
-	[password] VARCHAR(100),
-	email VARCHAR(100),
 
 	FOREIGN KEY(owner_id) REFERENCES [OWNER](owner_id)
 );
