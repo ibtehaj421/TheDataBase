@@ -1,51 +1,51 @@
-membership_id,gym_id,expiry,[type]
-P1,G1,10/06/2023,Standard
-P2,G2,15/07/2023,Premium
-P3,G3,20/08/2023,Standard
-P4,G1,25/09/2023,Student
-P5,G2,30/10/2023,Standard
-P6,G3,20/11/2023,Premium
-P7,G1,05/12/2023,Student
-P8,G2,10/01/2024,Premium
-P9,G3,15/02/2024,Standard
-P10,G1,20/03/2024,Student
-P11,G2,25/04/2024,Premium
-P12,G3,30/05/2024,Standard
-P13,G1,05/06/2024,Student
-P14,G2,10/07/2024,Premium
-P15,G3,15/08/2024,Standard
-P16,G1,20/09/2024,Student
-P17,G2,25/10/2024,Premium
-P18,G3,30/11/2024,Standard
-P19,G1,05/12/2024,Student
-P20,G2,10/01/2025,Premium
-P21,G3,15/02/2025,Standard
-P22,G1,20/03/2025,Student
-P23,G2,25/04/2025,Premium
-P24,G3,30/05/2025,Standard
-P25,G1,05/06/2025,Student
-P26,G2,01/08/2023,Standard
-P27,G3,15/10/2023,Premium
-P28,G1,20/12/2023,Student
-P29,G2,05/02/2024,Premium
-P30,G3,10/04/2024,Standard
-P31,G1,15/06/2024,Student
-P32,G2,20/08/2024,Premium
-P33,G3,25/10/2024,Standard
-P34,G1,01/12/2024,Student
-P35,G2,10/02/2025,Premium
-P36,G3,15/04/2025,Standard
-P37,G1,05/09/2023,Student
-P38,G2,20/05/2024,Premium
-P39,G3,10/12/2023,Standard
-P40,G1,05/07/2024,Student
-P41,G2,20/02/2025,Premium
-P42,G3,20/10/2023,Standard
-P43,G1,30/08/2024,Student
-P44,G2,15/01/2024,Premium
-P45,G3,25/06/2023,Standard
-P46,G1,01/03/2025,Student
-P47,G2,15/09/2023,Premium
-P48,G3,28/02/2024,Standard
-P49,G1,15/01/2025,Student
-P50,G2,20/06/2024,Premium
+member_id,membership_id,workoutPlan_id,dietPlan_id,[name],[weight],email,password,verified
+M1,P1,NULL,NULL,Usman Khan,75,usman1khan@gmail.com,Usman@123,1
+M2,P2,NULL,NULL,Zara Malik,68,zara6malik@gmail.com,Zara@456,1
+M3,P3,NULL,NULL,Bilal Ahmed,85,bilal4ahmed@gmail.com,Bilal@789,1
+M4,P4,NULL,NULL,Nadia Saeed,70,nadia7saeed@gmail.com,Nadia@1234,1
+M5,P5,NULL,NULL,Hasan Raza,78,hasan2raza@gmail.com,Hasan@5678,1
+M6,P6,W3,NULL,Amna Farooq,65,amna5farooq@gmail.com,Amna@abcd,1
+M7,P7,NULL,NULL,Salman Khan,82,salman3khan@gmail.com,Salman@efgh,1
+M8,P8,W2,D1,Sumaira Iqbal,67,sumaira8iqbal@gmail.com,Sumaira@ijkl,1
+M9,P9,NULL,NULL,Arshad Malik,80,arshad9malik@gmail.com,Arshad@mnop,1
+M10,P10,NULL,NULL,Hira Qureshi,62,hira10qureshi@gmail.com,Hira@qrst,NULL
+M11,P11,NULL,NULL,Kamran Shaikh,77,kamran8shaikh@gmail.com,Kamran@uvwx,NULL
+M12,P12,NULL,NULL,Sara Rafiq,68,sara3rafiq@gmail.com,Sara@yzab,NULL
+M13,P13,NULL,NULL,Fahad Anwar,74,fahad5anwar@gmail.com,Fahad@cdef,1
+M14,P14,NULL,NULL,Safia Qureshi,60,safia2qureshi@gmail.com,Safia@ghij,1
+M15,P15,NULL,NULL,Aisha Malik,70,aisha6malik@gmail.com,Aisha@klmn,1
+M16,P16,NULL,D10,Junaid Iqbal,76,junaid8iqbal@gmail.com,Junaid@opqr,1
+M17,P17,NULL,NULL,Zara Bashir,64,zara4bashir@gmail.com,Zara@stuv,1
+M18,P18,NULL,NULL,Imran Khan,73,imran7khan@gmail.com,Imran@wxyz,1
+M19,P19,NULL,NULL,Irum Malik,65,irum9malik@gmail.com,Irum@12345,1
+M20,P20,NULL,NULL,Hamza Qureshi,80,hamza3qureshi@gmail.com,Hamza@67890,1
+M21,P21,NULL,NULL,Sara Ali,71,sara10ali@gmail.com,Sara@abcde,1
+M22,P22,NULL,NULL,Arif Malik,75,arif8malik@gmail.com,Arif@123456,1
+M23,P23,NULL,NULL,Fatima Khan,65,fatima4khan@gmail.com,Fatima@789012,1
+M24,P24,NULL,NULL,Hassan Raza,78,hassan6raza@gmail.com,Hassan@345678,1
+M25,P25,NULL,NULL,Amina Saeed,67,amina9saeed@gmail.com,Amina@901234,1
+M26,P26,NULL,NULL,Umar Malik,80,umar2malik@gmail.com,Umar@567890,1
+M27,P27,NULL,NULL,Zara Qureshi,69,zara7qureshi@gmail.com,Zara@1234567,1
+M28,P28,NULL,NULL,Usman Ahmed,85,usman3ahmed@gmail.com,Usman@7890123,1
+M29,P29,NULL,NULL,Samina Ali,70,samina1ali@gmail.com,Samina@2345678,1
+M30,P30,W5,NULL,Raza Khan,73,raza6khan@gmail.com,Raza@8901234,1
+M31,P31,NULL,D6,Zainab Iqbal,66,zainab9iqbal@gmail.com,Zainab@5678901,1
+M32,P32,NULL,NULL,Shahid Rafiq,78,shahid2rafiq@gmail.com,Shahid@23456789,1
+M33,P33,NULL,NULL,Ayesha Ahmed,65,ayesha6ahmed@gmail.com,Ayesha@89012345,1
+M34,P34,NULL,NULL,Hamza Malik,82,hamza5malik@gmail.com,Hamza@67890123,1
+M35,P35,NULL,NULL,Sadia Khan,68,sadia7khan@gmail.com,Sadia@34567890,1
+M36,P36,NULL,NULL,Arif Raza,72,arif2raza@gmail.com,Arif@0123456,1
+M37,P37,NULL,D3,Zara Bashir,69,zara6bashir@gmail.com,Zara@7890123,1
+M38,P38,NULL,NULL,Usman Rafiq,77,usman3rafiq@gmail.com,Usman@2345678,1
+M39,P39,NULL,NULL,Sara Saeed,66,sara9saeed@gmail.com,Sara@9012345,1
+M40,P40,NULL,NULL,Salman Ali,81,salman2ali@gmail.com,Salman@6789012,1
+M41,P41,NULL,NULL,Samira Malik,69,samira4malik@gmail.com,Samira@3456789,1
+M42,P42,W10,NULL,Fahad Ahmed,75,fahad8ahmed@gmail.com,Fahad@012345,1
+M43,P43,NULL,NULL,Farah Raza,70,farah7raza@gmail.com,Farah@678901,1
+M44,P44,NULL,NULL,Hina Saeed,68,hina6saeed@gmail.com,Hina@234567,1
+M45,P45,NULL,NULL,Kamran Khan,83,kamran10khan@gmail.com,Kamran@89012,1
+M46,P46,NULL,NULL,Zara Iqbal,72,zara3iqbal@gmail.com,Zara@345678,1
+M47,P47,W7,NULL,Imran Qureshi,78,imran5qureshi@gmail.com,Imran@901234,1
+M48,P48,NULL,NULL,Nadia Raza,65,nadia3raza@gmail.com,Nadia@567890,1
+M49,P49,NULL,NULL,Hassan Saeed,77,hassan8saeed@gmail.com,Hassan@123456,1
+M50,P50,W8,NULL,Aisha Rafiq,71,aisha1rafiq@gmail.com,Aisha@789012,1
