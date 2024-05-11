@@ -48,6 +48,7 @@ namespace TrainerInterface
             PopulateWorkouts();
             PopulateDietPlans();
             PopulateExercies();
+            PopulateMeals();
         }
 
         private void PopulateFeedback()
@@ -167,7 +168,7 @@ namespace TrainerInterface
                     connection.Open();
 
                     // SQL query to select usernames and passwords from the INFO table
-                    string query = "\r\nSELECT res1.[GymName], name, date from member join (\tSELECT gym.[name] as [GymName], member_id, date\tFROM TRAINING_SESSION \tjoin gym\ton GYM.gym_id = TRAINING_SESSION.gym_id\tWHERE trainer_id = 'T1') as RES1 on member.member_id = res1.member_id";
+                    string query = "\r\nSELECT res1.[GymName], name, date from member join (\tSELECT gym.[name] as [GymName], member_id, date\tFROM TRAINING_SESSION \tjoin gym\ton GYM.gym_id = TRAINING_SESSION.gym_id\tWHERE trainer_id = '" + this.id + "') as RES1 on member.member_id = res1.member_id";
 
                     // Create a data adapter to fetch data from the database
                     using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
@@ -459,6 +460,54 @@ namespace TrainerInterface
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+        private void PopulateMeals()
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "select nutrition_id, name, unit, quantity, calories from NUTRITION";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the mondayEx
+                        breakfastListBox5.Items.Clear();
+                        lunchListBox2.Items.Clear();
+                        dinnerListBox3.Items.Clear();
+                        snackListBox4.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string regItem = $"{row["nutrition_id"]} {row["name"]} {row["unit"]} {row["quantity"]} {row["calories"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            breakfastListBox5.Items.Add(regItem);
+                            lunchListBox2.Items.Add(regItem);
+                            dinnerListBox3.Items.Add(regItem);
+                            snackListBox4.Items.Add(regItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -698,6 +747,76 @@ namespace TrainerInterface
 
                     string sql = "SELECT CONCAT('W', CAST(COUNT(workoutplan_id) + 2 AS varchar(10))) AS new_id " +
                                  "FROM WORKOUT_PLAN";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())  // Check if there's a result
+                            {
+                                newId = reader["new_id"].ToString();  // Get the value from the "new_id" column
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that might occur during database connection or execution
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return newId;
+        }
+
+        public string GetNewDietPlanId()
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string newId = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string sql = "SELECT CONCAT('D', CAST(COUNT(dietplan_id) + 2 AS varchar(10))) AS new_id " +
+                                 "FROM DIET_PLAN";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())  // Check if there's a result
+                            {
+                                newId = reader["new_id"].ToString();  // Get the value from the "new_id" column
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that might occur during database connection or execution
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return newId;
+        }
+
+        public string GetNewMealId()
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string newId = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string sql = "SELECT CONCAT('ML', CAST(COUNT(meal_id) + 2 AS varchar(7))) AS new_id " +
+                                 "FROM MEAL";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -1032,6 +1151,394 @@ namespace TrainerInterface
             }
 
             MessageBox.Show("Workout plan added successfully!");
+        }
+
+        private void dcPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string sql;
+            
+            // BREAKFAST
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string mealID = GetNewMealId();
+                    mealID = GetNewMealId();
+                    
+                    foreach (string item in breakfastListBox5.CheckedItems)
+                    {
+                        string[] x = item.Split(' ');
+                        sql = "INSERT INTO MEAL_Nutrient VALUES ('" + x[0] + "','" + mealID + "','" + x[4] + "')";
+
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    
+
+                    sql = "INSERT INTO diet_PLAN VALUES ('" + GetNewDietPlanId() + "','" + mealID + "','" + "Breakfast" + "','" + textBox14.Text + "','" + textBox15.Text + "','" + textBox16.Text + "','" + "M1" + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    sql = "INSERT INTO MEAL VALUES ('" + mealID + "','" + "N1" + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle errors during database connection or execution
+               
+            }
+
+
+            // LUNCH
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string mealID = GetNewMealId();
+
+                    foreach (string item in lunchListBox2.CheckedItems)
+                    {
+                        string[] x = item.Split(' ');
+                        sql = "INSERT INTO MEAL_Nutrient VALUES ('" + x[0] + "','" + mealID + "','" + x[4] + "')";
+
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    sql = "INSERT INTO diet_PLAN VALUES ('" + GetNewDietPlanId() + "','" + mealID + "','" + "Lunch" + "','" + textBox14.Text + "','" + textBox15.Text + "','" + textBox16.Text + "','" + "M1" + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    sql = "INSERT INTO MEAL VALUES ('" + mealID + "','" + "N1" + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle errors during database connection or execution
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+
+            // DINNER
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string mealID = GetNewMealId();
+
+                    foreach (string item in dinnerListBox3.CheckedItems)
+                    {
+                        string[] x = item.Split(' ');
+                        sql = "INSERT INTO MEAL_Nutrient VALUES ('" + x[0] + "','" + mealID + "','" + x[4] + "')";
+
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    sql = "INSERT INTO diet_PLAN VALUES ('" + GetNewDietPlanId() + "','" + mealID + "','" + "Dinner" + "','" + textBox14.Text + "','" + textBox15.Text + "','" + textBox16.Text + "','" + "M1" + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    sql = "INSERT INTO MEAL VALUES ('" + mealID + "','" + "N1" + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle errors during database connection or execution
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+
+            // SNACK
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string mealID = GetNewMealId();
+
+                    foreach (string item in snackListBox4.CheckedItems)
+                    {
+                        string[] x = item.Split(' ');
+                        sql = "INSERT INTO MEAL_Nutrient VALUES ('" + x[0] + "','" + mealID + "','" + x[4] + "')";
+
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    sql = "INSERT INTO diet_PLAN VALUES ('" + GetNewDietPlanId() + "','" + mealID + "','" + "Snack" + "','" + textBox14.Text + "','" + textBox15.Text + "','" + textBox16.Text + "','" + "M1" + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    sql = "INSERT INTO MEAL VALUES ('" + mealID + "','" + "N1" + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle errors during database connection or execution
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            
+
+            MessageBox.Show("Diet plan added successfully!");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string sql = "select dietPlan_id, type, objective, guidelines, difficulty_level from DIET_Plan";
+
+            try
+            {
+                if (difficultyBox1.CheckedItems[0].ToString() == "Easy")
+                    sql = "select dietPlan_id, type, objective, guidelines, difficulty_level from DIET_Plan WHERE difficulty_level = 'Easy'";
+
+                if (difficultyBox1.CheckedItems[0].ToString() == "Medium")
+                    sql = "select dietPlan_id, type, objective, guidelines, difficulty_level from DIET_Plan WHERE difficulty_level = 'Medium'";
+
+                if (difficultyBox1.CheckedItems[0].ToString() == "Hard")
+                    sql = "select dietPlan_id, type, objective, guidelines, difficulty_level from DIET_Plan WHERE difficulty_level = 'Hard'";
+
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(sql, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        dpListBox.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["dietPlan_id"]}      {row["type"]}      {row["objective"]}                      {row["guidelines"]}                          {row["difficulty_level"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            dpListBox.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle errors during database connection or execution
+                MessageBox.Show(ex.Message);
+            }
+
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string sql = "select * from WORKOUT_PLAN";
+
+            try
+            {
+                if (difficultyBox2.CheckedItems[0].ToString() == "Easy")
+                    sql = "select * from Workout_Plan where difficulty_level = 'Easy'";
+
+                if (difficultyBox2.CheckedItems[0].ToString() == "Medium")
+                    sql = "select * from Workout_Plan where difficulty_level = 'Medium'";
+
+                if (difficultyBox2.CheckedItems[0].ToString() == "Hard")
+                    sql = "select * from Workout_Plan where difficulty_level = 'Hard'";
+
+
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(sql, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        wpListBox.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["workoutPlan_id"]}      {row["objective"]}                      {row["guidelines"]}                          {row["difficulty_level"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            wpListBox.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id";
+            
+            if (timedCheckedListBox1.CheckedItems[0].ToString() == "High to Low")
+                sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id order by rating desc;";
+
+            if (timedCheckedListBox1.CheckedItems[0].ToString() == "Low to High")
+                sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id order by rating asc;";
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(sql, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        feedbackTable.Items.Clear();
+
+                        // Variable to store total rating
+                        double totalRating = 0.0;
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["name"]}          {row["MemberName"]}          {row["rating"]}          {row["feedback"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            feedbackTable.Items.Add(feedbackItem);
+
+                            // Extract rating as double and add to total
+                            double rating = Convert.ToDouble(row["rating"]);
+                            totalRating += rating;
+                        }
+
+                        // Calculate average rating (handle division by zero)
+                        double averageRating = totalRating > 0 ? totalRating / dataTable.Rows.Count : 0.0;
+
+                        // Display average rating (replace with your desired location)
+                        feedbackText.Text = averageRating.ToString("F2"); // Format to two decimal places
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this.id);
+
+            if (timCheckedListBox2.CheckedItems.Count == 0)
+                return;
+
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string sql = "SELECT res1.GymName, name, date from member join ( SELECT gym.name AS GymName, member_id, date FROM TRAINING_SESSION join gym on gym.gym_id = TRAINING_SESSION.gym_id WHERE trainer_id = '" + this.id + "' ) AS res1 on member.member_id = res1.member_id";
+
+            if (timCheckedListBox2.CheckedItems[0].ToString() == "Oldest to Newest")
+                sql = "SELECT res1.GymName, name, date from member join ( SELECT gym.name AS GymName, member_id, date FROM TRAINING_SESSION join gym on gym.gym_id = TRAINING_SESSION.gym_id WHERE trainer_id = '" + this.id + "' ) AS res1 on member.member_id = res1.member_id ORDER BY date DESC;";
+
+            if (timCheckedListBox2.CheckedItems[0].ToString() == "Newest to Oldest")
+                sql = "SELECT res1.GymName, name, date from member join ( SELECT gym.name AS GymName, member_id, date FROM TRAINING_SESSION join gym on gym.gym_id = TRAINING_SESSION.gym_id WHERE trainer_id = '" + this.id + "' ) AS res1 on member.member_id = res1.member_id ORDER BY date ASC;";
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(sql, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the appointmentTable
+                        appointmentTable.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string appointmentItem = $"{row["GymName"]}          {row["name"]}          {row["date"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            appointmentTable.Items.Add(appointmentItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
     }
 }
