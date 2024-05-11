@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -110,6 +110,42 @@ namespace TrainerInterface
 
         }
 
+        public string GetNewTrainerId()
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string newId = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string sql = "SELECT CONCAT('T', CAST(COUNT(trainer_id) + 2 AS varchar(10))) AS new_id " +
+                                 "FROM TRAINER";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())  // Check if there's a result
+                            {
+                                newId = reader["new_id"].ToString();  // Get the value from the "new_id" column
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that might occur during database connection or execution
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return newId;
+        }
+
+
         private void Login_Click(object sender, EventArgs e)
         {
             string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
@@ -124,8 +160,9 @@ namespace TrainerInterface
                 string email = textBox3.Text;
                 string password = textBox4.Text;
                 string experience = textBox2.Text;
-                string id = "T01";
+                string id = GetNewTrainerId();
                 string clients = "0";
+                string rating = "0";
 
                 if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(experience) || string.IsNullOrEmpty(password) || name == "Name" || username == "Username" || email == "Email" || experience == "Experience" || password == "Password")
                 {
@@ -139,7 +176,7 @@ namespace TrainerInterface
                 textBox4.Clear();
                 textBox5.Clear();
 
-                string query1 = "Insert into TRAINER (trainer_id, name, username, password, email, experience, clients, rating) values ('" + id + "','" + name + "','" + username + "','" + password + "','" + email + "','" + experience + "','" + clients + "','" + null + "')";
+                string query1 = "Insert into TRAINER (trainer_id, name, username, password, email, experience, clients, rating) values ('" + id + "','" + name + "','" + username + "','" + password + "','" + email + "','" + experience + "','" + clients + "','" + rating + "')";
                 string query2 = "SELECT COUNT(*) FROM TRAINER WHERE Email = @Email OR Username = @Username";
 
                 using (SqlCommand cmd = new SqlCommand(query2, conn))
@@ -167,7 +204,7 @@ namespace TrainerInterface
                         conn.Close();
 
                         // Create an instance of the Dashboard
-                        Dashboard dashboard = new Dashboard();
+                        Dashboard dashboard = new Dashboard(name, username, email, password, experience, id, clients, rating);
 
                         this.Hide();
 
