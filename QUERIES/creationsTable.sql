@@ -41,8 +41,8 @@ CREATE TABLE TRAINER
 (
 	trainer_id VARCHAR(7) PRIMARY KEY NOT NULL,
 	[name] VARCHAR(30) NOT NULL,
-	username VARCHAR(100) NOT NULL,
-	[password] VARCHAR(100) NOT NULL,
+	username VARCHAR(100),
+	[password] VARCHAR(100),
 	email VARCHAR(100) NOT NULL,
 	experience VARCHAR(20),
 	clients INT,
