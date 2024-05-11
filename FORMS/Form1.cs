@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TrainerInterface
 {
@@ -105,14 +106,58 @@ namespace TrainerInterface
 
                     if (count > 0)
                     {
-                        // Create an instance of the Dashboard
-                        Dashboard dashboard = new Dashboard();
+                        string name, experience, id, clients, rating;
 
-                        this.Hide();
+                        // SQL query to fetch the data
+                        query = "SELECT trainer_id, name, experience, clients, rating FROM TRAINER WHERE username = @username";
 
-                        // Show the Dashboard
-                        dashboard.Show();
+                        try
+                        {
+                            using (SqlConnection connection = new SqlConnection(connectionString))
+                            {
+                                connection.Open();
+
+                                using (SqlCommand command = new SqlCommand(query, connection))
+                                {
+                                    command.Parameters.AddWithValue("@username", username);
+
+                                    using (SqlDataReader reader = command.ExecuteReader())
+                                    {
+                                        if (reader.Read())
+                                        {
+                                            // Retrieve values from the database and store them in variables
+                                            name = reader["name"].ToString();
+                                            experience = reader["experience"].ToString();
+                                            id = reader["trainer_id"].ToString();
+                                            clients = reader["clients"].ToString();
+                                            rating = reader["rating"].ToString();
+                                        }
+                                        else
+                                        {
+                                            // Handle the case where no data was found for the given username
+                                            MessageBox.Show("No data found for the provided username.");
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Create an instance of the Dashboard with the retrieved values
+                            Dashboard dashboard = new Dashboard(name, username, email, password, experience, id, clients, rating);
+
+                            this.Hide();
+
+                            // Show the Dashboard
+                            dashboard.Show();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            // Handle any errors
+                            MessageBox.Show("Error: " + ex.Message);
+                        }
                     }
+
 
                     else
                     {
