@@ -167,14 +167,13 @@ CREATE TABLE EXERCISE
 	exercise_id VARCHAR(7) PRIMARY KEY NOT NULL,
 	day_id VARCHAR(7) NOT NULL,
 	workoutPlan_id VARCHAR(7) NOT NULL,
-	equipment_id VARCHAR(7) NOT NULL,
+	equipment_name VARCHAR(100) NOT NULL,
 	[name] VARCHAR(30) NOT NULL,
 	[sets] INT NOT NULL,
 	reps INT NOT NULL,
 	restIntervals INT NOT NULL,
 	
-	FOREIGN KEY(day_id, workoutPlan_id) REFERENCES [DAY](day_id, workoutPlan_id),
-	FOREIGN KEY(equipment_id) REFERENCES EQUIPMENT(equipment_id)
+	FOREIGN KEY(day_id, workoutPlan_id) REFERENCES [DAY](day_id, workoutPlan_id)
 );
 
 -- Equipment
