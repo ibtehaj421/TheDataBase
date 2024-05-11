@@ -135,7 +135,7 @@ CREATE TABLE Membership
 CREATE TABLE WORKOUT_PLAN
 (
 	workoutPlan_id VARCHAR(7) PRIMARY KEY NOT NULL,
-	objective VARCHAR(30) NOT NULL,
+	objective VARCHAR(100) NOT NULL,
 	guidelines VARCHAR(7) NOT NULL,
 	difficulty_level VARCHAR(7) NOT NULL,
 );
@@ -208,7 +208,7 @@ CREATE TABLE DIET_PLAN
 	dietPlan_id VARCHAR(7) PRIMARY KEY NOT NULL,
 	meal_id VARCHAR(7) UNIQUE NOT NULL, --each diet plan consists of a meal so we link directly to a meal from the diet plan
 	[type] VARCHAR(30) NOT NULL, --breakfast lunch dinner etc.
-	objective VARCHAR(30) NOT NULL,
+	objective VARCHAR(100) NOT NULL,
 	guidelines VARCHAR(200) NOT NULL,
 	difficulty_level VARCHAR(7) NOT NULL
 );
