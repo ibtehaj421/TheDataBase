@@ -266,9 +266,13 @@ CREATE TABLE TRAINER_REVIEW
 	trainer_id VARCHAR(7) NOT NULL,
 	feedback VARCHAR(300),
 	rating FLOAT NOT NULL,
+	gym_id VARCHAR(7) NOT NULL,
+	member_id VARCHAR(7) NOT NULL,
 
 	PRIMARY KEY (trainer_id, review_id),
-	FOREIGN KEY(trainer_id) REFERENCES TRAINER(trainer_id)
+	FOREIGN KEY(trainer_id) REFERENCES TRAINER(trainer_id),
+	FOREIGN KEY(member_id) REFERENCES member(member_id),
+	FOREIGN KEY(gym_id) REFERENCES gym(gym_id)
 );
 
 -- Gym Review
