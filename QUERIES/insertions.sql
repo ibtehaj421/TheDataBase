@@ -125,9 +125,9 @@ CREATE TABLE Membership  --for the member
 CREATE TABLE WORKOUT_PLAN --for the member
 (
 	workoutPlan_id VARCHAR(7) PRIMARY KEY NOT NULL,
-	objective VARCHAR(30) NOT NULL,
-	guidelines VARCHAR(7) NOT NULL,
-	difficulty_level VARCHAR(7) NOT NULL,
+	objective VARCHAR(100) NOT NULL,
+	guidelines VARCHAR(100) NOT NULL,
+	difficulty_level VARCHAR(100) NOT NULL,
 );
 
 -- DAY
