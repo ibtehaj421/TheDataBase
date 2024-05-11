@@ -1,0 +1,51 @@
+dietPlan_id,meal_id,[type],objective,guidelines,difficulty_level
+D1,ML1,Breakfast,Weight Loss,Low-calorie breakfast with high protein,Medium
+D2,ML1,Lunch,Muscle Gain,High-protein meal with moderate carbohydrates,Hard
+D3,ML2,Dinner,Weight Loss,Low-calorie dinner with fiber-rich vegetables,Medium
+D4,ML2,Snack,General Health,Healthy snack with fruits and nuts,Easy
+D5,ML3,Breakfast,General Health,Balanced breakfast with whole grains,Easy
+D6,ML3,Lunch,Muscle Gain,High-protein meal with complex carbohydrates,Hard
+D7,ML4,Dinner,Muscle Gain,High-protein dinner with complex carbohydrates,Hard
+D8,ML4,Snack,General Health,Nutritious snack with nuts and seeds,Easy
+D9,ML5,Breakfast,Weight Loss,Low-calorie breakfast with fruits and vegetables,Medium
+D10,ML5,Lunch,Weight Loss,Light lunch with lean protein and vegetables,Medium
+D11,ML6,Dinner,General Health,Balanced dinner with vegetables and lean protein,Medium
+D12,ML6,Snack,Weight Loss,Healthy snack with low-calorie fruits,Easy
+D13,ML7,Breakfast,General Health,Balanced breakfast with fiber and protein,Easy
+D14,ML7,Lunch,Muscle Gain,High-protein meal with moderate fats,Hard
+D15,ML8,Dinner,Muscle Gain,High-protein dinner with healthy fats,Hard
+D16,ML8,Snack,General Health,Nutritious snack with yogurt and berries,Easy
+D17,ML9,Breakfast,Weight Loss,Low-calorie breakfast with whole grains and fruits,Medium
+D18,ML9,Lunch,Weight Loss,Light lunch with lean meats and vegetables,Medium
+D19,ML10,Dinner,General Health,Balanced dinner with fish and vegetables,Medium
+D20,ML10,Snack,Weight Loss,Healthy snack with nuts and low-calorie fruits,Easy
+D21,ML11,Breakfast,General Health,Nutritious breakfast with fiber and protein,Easy
+D22,ML11,Lunch,Muscle Gain,High-protein meal with moderate carbohydrates,Hard
+D23,ML12,Dinner,Muscle Gain,High-protein dinner with complex carbohydrates,Hard
+D24,ML12,Snack,General Health,Healthy snack with nuts and seeds,Easy
+D25,ML13,Breakfast,Weight Loss,Low-calorie breakfast with fruits and vegetables,Medium
+D26,ML13,Lunch,Weight Loss,Light lunch with lean meats and vegetables,Medium
+D27,ML14,Dinner,General Health,Balanced dinner with vegetables and lean protein,Medium
+D28,ML14,Snack,Weight Loss,Healthy snack with low-calorie fruits,Easy
+D29,ML15,Breakfast,General Health,Balanced breakfast with fiber and protein,Easy
+D30,ML15,Lunch,Muscle Gain,High-protein meal with moderate fats,Hard
+D31,ML16,Dinner,Muscle Gain,High-protein dinner with healthy fats,Hard
+D32,ML16,Snack,General Health,Nutritious snack with yogurt and berries,Easy
+D33,ML17,Breakfast,Weight Loss,Low-calorie breakfast with whole grains and fruits,Medium
+D34,ML17,Lunch,Weight Loss,Light lunch with lean meats and vegetables,Medium
+D35,ML18,Dinner,General Health,Balanced dinner with fish and vegetables,Medium
+D36,ML18,Snack,Weight Loss,Healthy snack with nuts and low-calorie fruits,Easy
+D37,ML19,Breakfast,General Health,Nutritious breakfast with fiber and protein,Easy
+D38,ML19,Lunch,Muscle Gain,High-protein meal with moderate carbohydrates,Hard
+D39,ML20,Dinner,Muscle Gain,High-protein dinner with complex carbohydrates,Hard
+D40,ML20,Snack,General Health,Healthy snack with nuts and seeds,Easy
+D41,ML21,Breakfast,Weight Loss,Low-calorie breakfast with fruits and vegetables,Medium
+D42,ML21,Lunch,Weight Loss,Light lunch with lean meats and vegetables,Medium
+D43,ML22,Dinner,General Health,Balanced dinner with vegetables and lean protein,Medium
+D44,ML22,Snack,Weight Loss,Healthy snack with low-calorie fruits,Easy
+D45,ML23,Breakfast,General Health,Balanced breakfast with fiber and protein,Easy
+D46,ML23,Lunch,Muscle Gain,High-protein meal with moderate fats,Hard
+D47,ML24,Dinner,Muscle Gain,High-protein dinner with healthy fats,Hard
+D48,ML24,Snack,General Health,Nutritious snack with yogurt and berries,Easy
+D49,ML25,Breakfast,Weight Loss,Low-calorie breakfast with whole grains and fruits,Medium
+D50,ML25,Lunch,Weight Loss,Light lunch with lean meats and vegetables,Medium
