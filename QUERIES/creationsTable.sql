@@ -119,7 +119,12 @@ CREATE TABLE [MEMBER]
 );
 
 DROP TABLE MEMBER
-
+CREATE TABLE MEMBER_DIET(
+	member_id VARCHAR(7) NOT NULL,
+	diet_id VARCHAR(7) NOT NULL,
+	--and some other specifier maybe
+	FOREIGN KEY(member_id) REFERENCES MEMBER(member_id),
+	FOREIGN KEY(diet_id) REFERENCES DIET_PLAN(dietPlan_id));
 -- Membership
 CREATE TABLE Membership 
 (
@@ -254,7 +259,6 @@ CREATE TABLE meal_nutrient(
 	nutrient_id VARCHAR(7) NOT NULL,
 	meal_id VARCHAR(7) NOT NULL,
 	calorie INT NOT NULL, --must always be specified as it is the main
-	PRIMARY KEY(nutrient_id,meal_id),
 	FOREIGN KEY(nutrient_id) REFERENCES NUTRITION(nutrition_id),
 	FOREIGN KEY(meal_id) REFERENCES MEAL(meal_id)
 	);
