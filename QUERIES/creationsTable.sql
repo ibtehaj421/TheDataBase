@@ -68,7 +68,7 @@ CREATE TABLE SPECIALITY
 	-- Composite Primary Key
 	speciality_id VARCHAR(7) NOT NULL,
 	trainer_id VARCHAR(7) NOT NULL,
-	[name] VARCHAR(100) NOT NULL,
+	[name] VARCHAR(500) NOT NULL,
 
     PRIMARY KEY (trainer_id, speciality_id),
 	FOREIGN KEY(trainer_id) REFERENCES TRAINER(trainer_id)
