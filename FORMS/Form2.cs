@@ -164,7 +164,7 @@ namespace TrainerInterface
                 string clients = "0";
                 string rating = "0";
 
-                if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(experience) || string.IsNullOrEmpty(password) || name == "Name" || username == "Username" || email == "Email" || experience == "Experience" || password == "Password")
+                if (string.IsNullOrEmpty(name) || checkedListBox1.CheckedItems.Count == 0 || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(experience) || string.IsNullOrEmpty(password) || name == "Name" || username == "Username" || email == "Email" || experience == "Experience" || password == "Password")
                 {
                     MessageBox.Show("Please provide complete information.");
                     return;
@@ -178,6 +178,7 @@ namespace TrainerInterface
 
                 string query1 = "Insert into TRAINER (trainer_id, name, username, password, email, experience, clients, rating) values ('" + id + "','" + name + "','" + username + "','" + password + "','" + email + "','" + experience + "','" + clients + "','" + rating + "')";
                 string query2 = "SELECT COUNT(*) FROM TRAINER WHERE Email = @Email OR Username = @Username";
+                string query3 = "";
 
                 using (SqlCommand cmd = new SqlCommand(query2, conn))
                 {
@@ -201,6 +202,20 @@ namespace TrainerInterface
                         cm = new SqlCommand(query1, conn);
                         cm.ExecuteNonQuery();
                         cm.Dispose();
+
+                        foreach (string item in checkedListBox1.CheckedItems)
+                        {
+                            query3 = "INSERT INTO TRAINER_GYM VALUES ('" + id + "', (SELECT gym_id FROM GYM WHERE NAME = '" + item.ToString() + "'))";
+                            cm = new SqlCommand(query3, conn);
+                            cm.ExecuteNonQuery();
+                            cm.Dispose();
+                        }
+
+                        query3 = "INSERT INTO verification_request VALUES ((SELECT CONCAT('R', COUNT(request_id) + 1) FROM verification_request), '" + id + "')";
+                        cm = new SqlCommand(query3, conn);
+                        cm.ExecuteNonQuery();
+                        cm.Dispose();
+
                         conn.Close();
 
                         // Create an instance of the Dashboard
