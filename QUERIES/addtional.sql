@@ -217,3 +217,100 @@ BEGIN
 	INSERT INTO GYM_REVIEW(review_id,gym_id,feedback,rating) VALUES (CONCAT('R',@reviewID),@gymID,@feedback,@rating);
 END
 EXEC AddGymReview @trainer= ,@feedback= ,@rating= ;
+
+--work out page filters
+WITH SpecificPlan AS(
+	SELECT workoutPlan_id FROM WORKOUT_PLAN WHERE difficulty_level = 'Easy'),
+	SpecificExercise AS(
+	SELECT SP.workoutPlan_id,E.name,E.sets,E.reps,E.restIntervals,E.day_id FROM EXERCISE E JOIN SpecificPlan SP ON E.workoutPlan_id = SP.workoutPlan_id)
+	SELECT SE.workoutPlan_id,SE.name,SE.sets,SE.reps,SE.restIntervals,D.dayOfWeek FROM SpecificExercise SE JOIN DAY D ON SE.day_id = D.day_id;
+
+WITH muscleEx AS (
+	SELECT exercise_id FROM MUSCLE WHERE name = 'Triceps'),
+	spEX AS(
+	SELECT SP.workoutPlan_id,SP.name,SP.sets,SP.reps,SP.restIntervals FROM muscleEx M JOIN EXERCISE SP ON M.exercise_id = SP.exercise_id)
+	SELECT SP.workoutPlan_id,SP.name,SP.sets,SP.reps,SP.restIntervals,D.dayOfWeek FROM spEX SP JOIN DAY D ON SP.workoutPlan_id = D.workoutPlan_id;
+
+WITH SpecificPlan AS(
+	SELECT workoutPlan_id FROM TRAINER_WORKOUTPLAN),
+	SpecificEx AS(
+	SELECT SP.workoutPlan_id,E.name,E.sets,E.reps,E.restIntervals,E.day_id FROM EXERCISE E JOIN SpecificPlan SP ON E.workoutPlan_id = SP.workoutPlan_id)
+	SELECT SE.workoutPlan_id,SE.name,SE.sets,SE.reps,SE.restIntervals,D.dayOfWeek FROM SpecificEx SE JOIN DAY D ON SE.day_id = D.day_id;
+
+WITH SpecificPlan AS(
+	SELECT DISTINCT(work_id) FROM MEMBER_WORKOUT WHERE member_id IN ('M2')),
+	SpecificEx AS(
+	SELECT SP.work_id,E.name,E.sets,E.reps,E.restIntervals,E.day_id FROM EXERCISE E JOIN SpecificPlan SP ON E.workoutPlan_id = SP.work_id)
+	SELECT SE.work_id,SE.name,SE.sets,SE.reps,SE.restIntervals,D.dayOfWeek FROM SpecificEx SE JOIN DAY D ON SE.day_id = D.day_id;
+
+--work out plan filters.
+CREATE PROCEDURE AddWorkPlan(
+	@memberID VARCHAR(7),
+	@Exercise VARCHAR(30),
+	@objective VARCHAR(30),
+	@difficulty VARCHAR(20),
+	@dayofweek VARCHAR(20),
+	@equipment VARCHAR(30),
+	@guideline VARCHAR(50),
+	@sets INT,
+	@reps INT,
+	@rest INT
+	)
+AS
+BEGIN
+	DECLARE @dayID INT;
+	DECLARE @workID INT;
+	DECLARE @exID INT;
+	SET @dayID = (SELECT COUNT(*)+1 FROM DAY);
+	SET @workID = (SELECT COUNT(*)+2 FROM WORKOUT_PLAN);
+	SET @exID = (SELECT COUNT(*)+1 FROM EXERCISE);
+	INSERT INTO WORKOUT_PLAN(workoutPlan_id,objective,guidelines,difficulty_level) VALUES(CONCAT('W',@workID),@objective,@guideline,@difficulty);
+	INSERT INTO DAY(day_id,workoutPlan_id,dayOfWeek) VALUES(CONCAT('Y',@dayID),CONCAT('W',@workID),@dayofweek);
+	INSERT INTO EXERCISE(exercise_id,day_id,workoutPlan_id,name,eqiupment_name,sets,reps,restIntervals) VALUES (CONCAT('E',@exID),CONCAT('Y',@dayID),CONCAT('W',@workID),@Exercise,@equipment,@sets,@reps,@rest);
+	INSERT INTO MEMBER_WORKOUT(member_id,work_id) VALUES(@memberID,CONCAT('W',@workID));
+END
+
+CREATE PROCEDURE AddTrainerReview(
+	@trainerID VARCHAR(7),
+	@feedback VARCHAR(300),
+	@rating FLOAT
+	)
+AS
+BEGIN
+	DECLARE @reviewID VARCHAR(7);
+	SET @reviewID = (SELECT COUNT(*)+1 FROM TRAINER_REVIEW);
+	INSERT INTO TRAINER_REVIEW(review_id,trainer_id,feedback,rating) VALUES (CONCAT('R',@reviewID),@trainerID,@feedback,@rating);
+END
+DELETE FROM GYM_REVIEW
+
+CREATE PROCEDURE AddGymReview(
+	@gymID VARCHAR(7),
+	@feedback VARCHAR(300),
+	@rating FLOAT
+	)
+AS
+BEGIN
+	DECLARE @reviewID VARCHAR(7);
+	SET @reviewID = (SELECT COUNT(*)+1 FROM TRAINER_REVIEW);
+	INSERT INTO GYM_REVIEW(review_id,gym_id,feedback,rating) VALUES (CONCAT('R',@reviewID),@gymID,@feedback,@rating);
+END
+
+--some other reports
+WITH SpecificTrainer AS(
+	SELECT trainer_id,gym_id FROM TRAINING_SESSION WHERE member_id = 'M2'
+	)
+	SELECT T.trainer_id,T.name,T.experience,T.clients,T.rating FROM SpecificTrainer ST JOIN TRAINER T ON ST.trainer_id = T.trainer_id JOIN GYM G ON ST.gym_id = G.gym_id; 
+
+SELECT * FROM TRAINER_GYM
+
+WITH specific AS(
+	SELECT membership_id FROM MEMBER WHERE member_id = 'M1'
+	),
+	specificGym AS(
+	SELECT gym_id FROM Membership M JOIN specific S on M.membership_id = S.membership_id
+	),
+	specificTrain AS(
+	SELECT trainer_id FROM TRAINER_GYM T JOIN specificGym S ON T.gym_id = S.gym_id
+	)
+	SELECT T.trainer_id,T.name,T.experience,T.clients,T.rating FROM specificTrain S join TRAINER T on T.trainer_id = S.trainer_id WHERE T.rating > 4; 
+--some other reports
