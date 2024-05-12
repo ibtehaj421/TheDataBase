@@ -323,3 +323,85 @@ CREATE TABLE TRAINING_SESSION
 	FOREIGN KEY(member_id) REFERENCES [MEMBER](member_id),
 	FOREIGN KEY(gym_id) REFERENCES GYM(gym_id)
 );
+
+CREATE TABLE AUDIT
+(
+	audit_id VARCHAR(7) PRIMARY KEY NOT NULL,
+	description VARCHAR(100) NOT NULL,
+	date DATETIME NOT NULL
+);
+
+-- Triggers
+CREATE Trigger memberInsertion
+ON MEMBER
+FOR INSERT
+AS
+BEGIN
+	INSERT INTO AUDIT
+	Values ((SELECT concat('A', count(audit_id) + 1) from audit) , 'New Member has been added.', getDate());
+END
+
+CREATE Trigger gymInsertion
+ON GYM
+FOR INSERT
+AS
+BEGIN
+	INSERT INTO AUDIT
+	Values ((SELECT concat('A', count(audit_id) + 1) from audit) , 'New Gym has been added.', getDate());
+END
+
+CREATE Trigger ownerInsertion
+ON OWNER
+FOR INSERT
+AS
+BEGIN
+	INSERT INTO AUDIT
+	Values ((SELECT concat('A', count(audit_id) + 1) from audit) , 'New Owner has been added.', getDate());
+END
+
+CREATE Trigger dietPlanInsertion
+ON DIET_PLAN
+FOR INSERT
+AS
+BEGIN
+	INSERT INTO AUDIT
+	Values ((SELECT concat('A', count(audit_id) + 1) from audit) , 'New Diet Plan has been added.', getDate());
+END
+
+CREATE Trigger workoutPlanInsertion
+ON WORKOUT_PLAN
+FOR INSERT
+AS
+BEGIN
+	INSERT INTO AUDIT
+	Values ((SELECT concat('A', count(audit_id) + 1) from audit) , 'New Workout Plan has been added.', getDate());
+END
+
+CREATE Trigger trainerInsertion
+ON TRAINER
+FOR INSERT
+AS
+BEGIN
+	INSERT INTO AUDIT
+	Values ((SELECT concat('A', count(audit_id) + 1) from audit) , 'New Trainer has been added.', getDate());
+END
+
+CREATE Trigger gymReviewInsertion
+ON GYM_REVIEW
+FOR INSERT
+AS
+BEGIN
+	INSERT INTO AUDIT
+	Values ((SELECT concat('A', count(audit_id) + 1) from audit) , 'New Gym Review has been added.', getDate());
+END
+
+CREATE Trigger trainerReviewInsertion
+ON TRAINER_REVIEW
+FOR INSERT
+AS
+BEGIN
+	INSERT INTO AUDIT
+	Values ((SELECT concat('A', count(audit_id) + 1) from audit) , 'New Gym Review has been added.', getDate());
+END
+
+select * from audit
