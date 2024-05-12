@@ -49,6 +49,7 @@ namespace TrainerInterface
             PopulateDietPlans();
             PopulateExercies();
             PopulateMeals();
+            PopulateMachines();
         }
 
         private void PopulateFeedback()
@@ -498,6 +499,48 @@ namespace TrainerInterface
                             lunchListBox2.Items.Add(regItem);
                             dinnerListBox3.Items.Add(regItem);
                             snackListBox4.Items.Add(regItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+        private void PopulateMachines()
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "select distinct equipment_name from exercise";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the mondayEx
+                        machinesCheckedListBox.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string regItem = $"{row["equipment_name"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            machinesCheckedListBox.Items.Add(regItem);
                         }
                     }
                 }
@@ -1490,8 +1533,6 @@ namespace TrainerInterface
 
         private void button9_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this.id);
-
             if (timCheckedListBox2.CheckedItems.Count == 0)
                 return;
 
@@ -1530,6 +1571,399 @@ namespace TrainerInterface
 
                             // Add the formatted feedback item to the ListBox
                             appointmentTable.Items.Add(appointmentItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id";
+            
+            if (ratingCheckedListBox1.CheckedItems[0].ToString() == "> 4")
+                sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id where rating > 4;";
+
+            if (ratingCheckedListBox1.CheckedItems[0].ToString() == "> 3 & < 4")
+                sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id where rating > 3 AND rating < 4;";
+
+            if (ratingCheckedListBox1.CheckedItems[0].ToString() == "> 2 & < 3")
+                sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id  where rating > 2 AND rating < 3";
+
+            if (ratingCheckedListBox1.CheckedItems[0].ToString() == "> 1 & < 2")
+                sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id  where rating > 1 AND rating < 2";
+
+            if (ratingCheckedListBox1.CheckedItems[0].ToString() == "> 0 & < 1")
+                sql = "select res1.name, member.name as [MemberName], rating, feedback from member join ( SELECT name, trainer_review.gym_id as [member_id], trainer_review.rating, feedback FROM TRAINER_REVIEW join gym on gym.gym_id = trainer_review.member_id WHERE trainer_id = 'T1' ) as res1 on member.member_id = res1.member_id  where rating > 0 AND rating < 1";
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(sql, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        feedbackTable.Items.Clear();
+
+                        // Variable to store total rating
+                        double totalRating = 0.0;
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["name"]}          {row["MemberName"]}          {row["rating"]}          {row["feedback"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            feedbackTable.Items.Add(feedbackItem);
+
+                            // Extract rating as double and add to total
+                            double rating = Convert.ToDouble(row["rating"]);
+                            totalRating += rating;
+                        }
+
+                        // Calculate average rating (handle division by zero)
+                        double averageRating = totalRating > 0 ? totalRating / dataTable.Rows.Count : 0.0;
+
+                        // Display average rating (replace with your desired location)
+                        feedbackText.Text = averageRating.ToString("F2"); // Format to two decimal places
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+            string equipmentName = machinesCheckedListBox.CheckedItems[0].ToString();
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "SELECT* FROM Workout_Plan W JOIN Exercise E ON W.workoutPlan_id = E.workoutPlan_id WHERE E.equipment_name != '" + machinesCheckedListBox.CheckedItems[0].ToString() + "'";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        wpListBox.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["workoutPlan_id"]}      {row["objective"]}                      {row["guidelines"]}                          {row["difficulty_level"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            wpListBox.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "SELECT RES1.workoutPlan_id, dayofweek, equipment_name, sets, reps, restIntervals FROM EXERCISE JOIN(SELECT EXERCISE_DAY.workoutPlan_id, dayofweek, exercise_id FROM EXERCISE_DAY JOIN DAY ON DAY.day_id = EXERCISE_DAY.day_id) AS RES1 on EXERCISE.exercise_id = RES1.exercise_id where equipment_name != '" + machinesCheckedListBox.CheckedItems[0].ToString() + "' ORDER BY workoutPlan_id";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        exerciseListBox.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["workoutPlan_id"]}      {row["dayofweek"]}       {row["equipment_name"]}                                           {row["sets"]}   {row["reps"]}   {row["restintervals"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            exerciseListBox.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "SELECT * FROM Diet_Plan D JOIN Meal_Nutrient M ON D.member_id = M.meal_id JOIN Nutrition N ON N.Nutrition_id = M.Nutrient_id JOIN Allergen A ON A.allergen_id = N.allergen_id WHERE A.[name] != 'Peanuts'";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        dpListBox.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["dietPlan_id"]}      {row["type"]}      {row["objective"]}                      {row["guidelines"]}                          {row["difficulty_level"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            dpListBox.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "SELECT dietPlan_id, meal_id, RES2.name AS [NutritionName], ALLERGEN.NAME as [AllergenName] FROM ALLERGEN JOIN ( \tSELECT dietPlan_id, meal_id, NUTRITION.name, allergen_id \tFROM NUTRITION \tJOIN ( \t\tSELECT dietPlan_id, meal.meal_id, nutrition_id \t\tFROM DIET_PLAN \t\tJOIN MEAL \t\tON MEAL.meal_id = DIET_PLAN.member_id \t) AS RES1 \tON RES1.nutrition_id = NUTRITION.nutrition_id ) AS RES2 ON ALLERGEN.ALLERGEN_ID = RES2.ALLERGEN_ID where ALLERGEN.NAME != 'Peanuts'";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        mealListBox1.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["dietPlan_id"]}           {row["meal_id"]}           {row["NutritionName"]}           {row["AllergenName"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            mealListBox1.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "SELECT * FROM Diet_Plan D JOIN Meal_Nutrient M ON D.member_id = M.meal_id JOIN Nutrition N ON N.Nutrition_id = M.Nutrient_id WHERE N.[name] = 'Carbohydrates' AND N.[unit] = 'grams' AND N.[quantity] < 300";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        dpListBox.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["dietPlan_id"]}      {row["type"]}      {row["objective"]}                      {row["guidelines"]}                          {row["difficulty_level"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            dpListBox.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "SELECT dietPlan_id, meal_id, RES2.name AS [NutritionName], ALLERGEN.NAME as [AllergenName] FROM ALLERGEN JOIN ( \tSELECT dietPlan_id, meal_id, NUTRITION.name, allergen_id \tFROM NUTRITION \tJOIN ( \t\tSELECT dietPlan_id, meal.meal_id, nutrition_id \t\tFROM DIET_PLAN \t\tJOIN MEAL \t\tON MEAL.meal_id = DIET_PLAN.member_id \t) AS RES1 \tON RES1.nutrition_id = NUTRITION.nutrition_id ) AS RES2 ON ALLERGEN.ALLERGEN_ID = RES2.ALLERGEN_ID where RES2.NAME = 'Carbohydrates'";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        mealListBox1.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["dietPlan_id"]}           {row["meal_id"]}           {row["NutritionName"]}           {row["AllergenName"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            mealListBox1.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=ALI-DELL\\SQLEXPRESS;Initial Catalog=SYNtrainer;Integrated Security=True";
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "select dietPlan_id, type, objective, guidelines, difficulty_level from DIET_Plan where type = 'Breakfast'";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        dpListBox.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["dietPlan_id"]}      {row["type"]}      {row["objective"]}                      {row["guidelines"]}                          {row["difficulty_level"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            dpListBox.Items.Add(feedbackItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            try
+            {
+                // Create a connection to the database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // SQL query to select usernames and passwords from the INFO table
+                    string query = "SELECT dietPlan_id, meal_id, RES2.name AS [NutritionName], ALLERGEN.NAME as [AllergenName], calories FROM ALLERGEN JOIN ( \tSELECT dietPlan_id, meal_id, NUTRITION.name, allergen_id, calories \tFROM NUTRITION \tJOIN ( \t\tSELECT dietPlan_id, meal.meal_id, nutrition_id \t\tFROM DIET_PLAN \t\tJOIN MEAL \t\tON MEAL.meal_id = DIET_PLAN.member_id where type = 'Breakfast' \t) AS RES1 \tON RES1.nutrition_id = NUTRITION.nutrition_id where calories < 500 ) AS RES2 ON ALLERGEN.ALLERGEN_ID = RES2.ALLERGEN_ID";
+
+                    // Create a data adapter to fetch data from the database
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        // Create a DataTable to hold the fetched data (optional, can build the list directly)
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear the existing items in the feedbackTable
+                        mealListBox1.Items.Clear();
+
+                        // Loop through each row in the DataTable (or directly iterate over the data)
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            // Build the string with separation
+                            string feedbackItem = $"{row["dietPlan_id"]}           {row["meal_id"]}           {row["NutritionName"]}           {row["AllergenName"]}           {row["calories"]}";
+
+                            // Add the formatted feedback item to the ListBox
+                            mealListBox1.Items.Add(feedbackItem);
                         }
                     }
                 }
