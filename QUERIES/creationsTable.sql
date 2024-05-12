@@ -125,6 +125,11 @@ CREATE TABLE MEMBER_DIET(
 	--and some other specifier maybe
 	FOREIGN KEY(member_id) REFERENCES MEMBER(member_id),
 	FOREIGN KEY(diet_id) REFERENCES DIET_PLAN(dietPlan_id));
+CREATE TABLE MEMBER_WORKOUT(
+	member_id VARCHAR(7) NOT NULL,
+	work_id VARCHAR(7) NOT NULL,
+	FOREIGN KEY(member_id) REFERENCES MEMBER(member_id),
+	FOREIGN KEY(work_id) REFERENCES WORKOUT_PLAN(workoutPlan_id));
 -- Membership
 CREATE TABLE Membership 
 (
