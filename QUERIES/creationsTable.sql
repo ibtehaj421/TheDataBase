@@ -47,6 +47,7 @@ CREATE TABLE TRAINER
 	experience VARCHAR(20),
 	clients INT,
 	rating FLOAT,
+	verification INT
 );
 
 -- Trainer_Gym
