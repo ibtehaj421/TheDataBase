@@ -294,7 +294,20 @@ BEGIN
 	SET @reviewID = (SELECT COUNT(*)+1 FROM TRAINER_REVIEW);
 	INSERT INTO GYM_REVIEW(review_id,gym_id,feedback,rating) VALUES (CONCAT('R',@reviewID),@gymID,@feedback,@rating);
 END
-
+CREATE PROCEDURE RequestSession(
+	@memberID VARCHAR(7),
+	@trainerID VARCHAR(7)
+	)
+AS
+BEGIN 
+	DECLARE @gymID VARCHAR(7);
+	DECLARE @date DATETIME;
+	DECLARE @sessionID INT;
+	SET @gymID = (SELECT gym_id FROM Membership M JOIN MEMBER MM ON M.membership_id = MM.membership_id WHERE member_id = @memberID);
+	SET @date = GETDATE();
+	SET @sessionID = (SELECT COUNT(*)+1 FROM TRAINING_SESSION);
+	INSERT INTO TRAINING_SESSION(trainingSession_id,trainer_id,gym_id,member_id,date) VALUES (CONCAT('TS',@sessionID),@trainerID,@gymID,@memberID,@date);
+END
 --some other reports
 WITH SpecificTrainer AS(
 	SELECT trainer_id,gym_id FROM TRAINING_SESSION WHERE member_id = 'M2'
